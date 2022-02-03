@@ -28,7 +28,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: 'dashboard',
+    uniqueName: 'todo',
     publicPath: 'auto',
   },
   optimization: {
@@ -44,8 +44,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      remotes: {
-        todo: 'http://localhost:4201/remoteEntry.js',
+      name: 'todo',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Module': 'apps/todo/src/app/remote-entry/entry.module.ts',
       },
       shared: share({
         '@angular/core': {
